@@ -464,37 +464,39 @@ def getPayroll():
     @app.route("/applyleave", methods=['POST'])
     def applyleave():
     emp_id = request.form['emp_id']
-    emp_id = request.form['emp_id']
-    date = request.form['date']
-    duration = request.form['duration']
+    leave_type = request.form['leave_type']
+    reason = request.form['reason']
+    leave_id = request.form['leave_id']
+    start_date = request.form['start_date']
+    end_date = request.form['end_date']
 
-    insert_attendance = "INSERT INTO duty VALUES (%s, %s, %s, %s)"
+    insert_leave = "INSERT INTO leave VALUES (%s, %s, %s, %s, %s, %s)"
     cursor = db_conn.cursor()
 
     try:
-        cursor.execute(insert_attendance, (duty_id, emp_id, date, duration))
+        cursor.execute(insert_leave, (emp_id, leave_type, reason, leave_id, start_date, end_date))
         db_conn.commit()
 
     except:
         print ("Error: unable to fecth data")
 
-    return render_template('AttendanceOutput.html', id=emp_id, date=date)
+    return render_template('ApplyLeaveOutput.html', id=emp_id, date=start_date)
 
-# View Attendance
-@app.route("/viewattendance", methods=['POST'])
-def ViewAttend():
+# List Leave
+@app.route("/listleave", methods=['POST'])
+def listLeave():
     cursor = db_conn.cursor()
-    cursor.execute("SELECT * FROM duty")
+    cursor.execute("SELECT * FROM leave")
     results = cursor.fetchall()
-    return render_template('ListAttendance.html', results=results) 
+    return render_template('ListLeave.html', results=results) 
 
-# Remove Attendance
-@app.route("/remattendance", methods=['POST'])
-def RemAttend():
+# Remove Leave
+@app.route("/remLeave", methods=['POST'])
+def RemLeave():
 
-    duty_id = request.form['duty_id']
+    leave_id = request.form['leave_id']
     
-    fetch_sql = "DELETE FROM duty WHERE duty_id = %s"
+    fetch_sql = "DELETE FROM leave WHERE leave_id = %s"
     cursor = db_conn.cursor()
 
     try:
@@ -504,43 +506,8 @@ def RemAttend():
     finally:
         cursor.close()  
 
-    return render_template('RemAttendanceOutput.html', duty_id=duty_id)
+    return render_template('RemLeaveOutput.html', leave_id=leave_id)
 
-# Edit Attendance
-@app.route("/searcheditattendance", methods=['POST', 'GET'])
-def SearchEditAttend():
-    duty_id = request.form['duty_id']
-
-    fetch_sql = "SELECT * FROM duty WHERE duty_id = %s"
-    cursor = db_conn.cursor()
-
-    try:
-        cursor.execute(fetch_sql, (duty_id))
-        db_conn.commit()
-        results = cursor.fetchall()
-
-    except:
-        print ("Error: unable to fecth data")
-
-    return render_template('EditAttendanceForm.html', results=results)
-
-@app.route("/editattendance", methods=['POST', 'GET'])
-def EditAttend():
-    duty_id = request.form['duty_id']
-    emp_id = request.form['emp_id']
-    date = request.form['date']
-    duration = request.form['duration']
-
-    fetch_sql = "UPDATE duty SET emp_id=%s, date=%s, duration=%s where duty_id = %s"
-    cursor = db_conn.cursor()
-
-    try:
-
-        cursor.execute(fetch_sql, (emp_id, date, duration, duty_id))
-        db_conn.commit()
-        
-    finally:
-        cursor.close()
 
     print("all modification done...")
     return render_template('EditAttendanceOutput.html', duty_id=duty_id)
