@@ -226,11 +226,11 @@ def RemEmp():
     
     fetch_sql = "DELETE FROM employee WHERE emp_id = %s"
     fetch_sql1 = "DELETE from payroll WHERE emp_id = %s"
-    cur = db_conn.cursor()
+    cursor = db_conn.cursor()
 
     try:
         cursor.execute(fetch_sql, (emp_id))
-        cur.execute(fetch_sql1, (emp_id))
+        cursor.execute(fetch_sql1, (emp_id))
         db_conn.commit()
 
         s3 = boto3.client('s3')
