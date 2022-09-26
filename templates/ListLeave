@@ -34,10 +34,10 @@
 			<table>
         <tr>
           <th>ID</th>
-          <th></th>
-          <th>Last Name</th>
-          <th>Primary Skill</th>
-          <th>Location</th>
+          <th>LeaveType</th>
+          <th>Reason</th>
+          <th>StartDate</th>
+          <th>EndDate</th>
         </tr>
 
         {% for row in results %}
