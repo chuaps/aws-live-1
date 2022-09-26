@@ -485,7 +485,7 @@ def getPayroll():
     except:
         print ("Error: unable to fecth data")
 
-    return render_template('ApplyLeaveOutput.html', id=emp_id, date=start_date)
+    return render_template('ApplyLeaveOutput.html', leave_id=leave_id)
 
 # List Leave
 @app.route("/ListLeave", methods=['POST'])
