@@ -465,18 +465,18 @@ def getPayroll():
 
     return render_template('PayrollOutput.html', data=data)
 
-    # Apply Leave
-    @app.route("/ApplyLeave", methods=['POST'])
-    def ApplyLeave():
-        emp_id = request.form['emp_id']
-        leave_type = request.form['leave_type']
-        reason = request.form['reason']
-        leave_id = request.form['leave_id']
-        start_date = request.form['start_date']
-        end_date = request.form['end_date']
+ # Apply Leave
+@app.route("/ApplyLeave", methods=['POST'])
+def ApplyLeave():
+    emp_id = request.form['emp_id']
+    leave_type = request.form['leave_type']
+    reason = request.form['reason']
+    leave_id = request.form['leave_id']
+    start_date = request.form['start_date']
+    end_date = request.form['end_date']
 
-        insert_leave = "INSERT INTO leave VALUES (%s, %s, %s, %s, %s, %s)"
-        cursor = db_conn.cursor()
+    insert_leave = "INSERT INTO leave VALUES (%s, %s, %s, %s, %s, %s)"
+    cursor = db_conn.cursor()
 
     try:
         cursor.execute(insert_leave, (emp_id, leave_type, reason, leave_id, start_date, end_date))
