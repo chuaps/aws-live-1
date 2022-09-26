@@ -82,6 +82,11 @@ def ToEditAttendance():
 def toPayroll():
     return render_template('Payroll.html')
 
+# Redirect Manage Leave
+@app.route("/toleave", methods=['GET', 'POST'])
+def toLeave():
+    return render_template('ManageLeave.html')
+
 # Redirect Add Leave
 @app.route("/toApplyLeave", methods=['GET', 'POST'])
 def ToApplyLeave():
