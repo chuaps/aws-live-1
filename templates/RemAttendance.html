@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Delete Attendance Information</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='layout.css') }}">
+</head>
+
+<body>
+    <div class="topnav">	
+		<form action="/" autocomplete="on" method = "GET">
+			<button type="submit">HOME</button>
+		</form>
+		<form action="/listemp" autocomplete="on" method = "GET">
+            <button type="submit">EMPLOYEE LIST</button>
+		</form>
+		<form action="/tomanageattendance" autocomplete="on" method = "POST">
+			<button type="submit">MANAGE ATTENDANCE</button>
+		</form>
+		<form action="/tomanageemp" autocomplete="on" method = "POST">
+			<button type="submit">MANAGE EMPLOYEE</button>
+		</form>
+		<form action="/topayroll" autocomplete="on" method = "POST">
+			<button type="submit">PAYROLL</button>
+		</form>
+		<form action="/toleave" autocomplete="on" method = "POST">
+			<button type="submit">LEAVE</button>
+		</form>
+	</div>
+
+    <h1>Remove Attendance</h1>
+
+    <div class="container">
+        <form action="/remattendance" autocomplete="on" method="POST">
+            <div class="row">
+                <div class="col-25">
+                    <label>Enter Duty ID:</label>
+                </div>
+                <div class="col-75">
+                    <input type="number" name="duty_id" autofocus placeholder="001">
+                </div>
+            </div>
+            <form action="/remattendance" autocomplete="on" method="POST">
+                <button class="button" width="150px" type="submit">REMOVE DUTY</button>
+            </form>
+        </form>
+
+    </div>
+</body>
+
+</html>
